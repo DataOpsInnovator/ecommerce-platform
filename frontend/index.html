@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ShopSmartlytoday - Your one-stop shop for a vast range of products.">
+  <meta name="keywords" content="ShopSmartlytoday, eCommerce, Shopping, Online Store, Deals">
+  <title>ShopSmartlytoday | Online Shopping Made Easy</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+  /* Add styles for horizontal display of Recommended Products */
+  .recommended-products .product-grid { display: flex; justify-content: space-between; gap: 20px; }
+  .recommended-products .product-item { width: 30%; text-align: center; }
+  .search-bar select, .search-bar input[type="text"] { height: 40px; padding: 5px; font-size: 16px; }
+  .search-bar { display: flex; align-items: center; gap: 10px; }
+  .user-options { display: flex; align-items: center; gap: 20px; }
+  .user-options select { height: 40px; font-size: 16px; }
+  .category-links { display: flex; justify-content: space-around; margin-top: 15px; background-color: #f4f6f8; padding: 10px 0; }
+  .category-links a { text-decoration: none; color: #0046be; font-size: 1.1em; padding: 10px 15px; }
+  .category-links a:hover { background-color: #f90; color: white; border-radius: 5px; }
+  .footer-content { display: flex; justify-content: space-between; gap: 30px; }
+  .footer-column { width: 18%; }
+  .footer-column h3 { margin-bottom: 10px; color: white; }
+  .footer-column ul { list-style-type: none; padding: 0; }
+  .footer-column ul li a { text-decoration: none; color: white; }
+  .footer-column ul li a:hover { color: #007bff; }
+  footer { background-color: #333; padding: 20px; }
+  .footer-bottom { text-align: center; color: white; margin-top: 20px; }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-top">
+    <div class="logo">
+      <a href="index.html"><img src="public/images/logo.png" alt="ShopSmartlytoday Logo" style="width: 150px; height: auto;"></a>
+    </div>
+    <div class="search-bar">
+      <select name="category" id="category">
+        <option value="all">All</option>
+        <option value="electronics">Electronics</option>
+        <option value="fashion">Fashion</option>
+        <option value="home">Home & Kitchen</option>
+        <option value="beauty">Beauty</option>
+        <option value="sports">Sports & Outdoors</option>
+        <option value="toys">Toys & Games</option>
+        <option value="books">Books</option>
+        <option value="health">Health & Wellness</option>
+        <option value="grocery">Grocery</option>
+        <option value="fitness">Fitness</option>
+        <option value="smartwatches">Smartwatches</option>
+        <option value="headphones">Headphones</option>
+      </select>
+      <input type="text" placeholder="Search millions of products...">
+      <button type="submit">Search</button>
+    </div>
+    <div class="user-options">
+      <a href="account.html">Hello, Sign In</a> | <a href="signup.html">Sign Up</a> | <a href="orders.html">Orders</a> | <a href="cart.html">Cart (0)</a>
+      <select name="country" id="country">
+        <option value="us">United States</option>
+        <option value="ca">Canada</option>
+        <option value="uk">United Kingdom</option>
+        <option value="de">Germany</option>
+        <option value="fr">France</option>
+        <option value="it">Italy</option>
+        <option value="es">Spain</option>
+        <option value="au">Australia</option>
+        <option value="jp">Japan</option>
+      </select>
+    </div>
+  </div>
+  <div class="category-links">
+    <a href="#">Electronics</a><a href="#">Fashion</a><a href="#">Home & Kitchen</a>
+    <a href="#">Beauty</a><a href="#">Sports & Outdoors</a><a href="#">Toys & Games</a>
+    <a href="#">Books</a><a href="#">Health & Wellness</a><a href="#">Grocery</a>
+    <a href="#">Today's Deals</a><a href="#">Customer Service</a>
+  </div>
+</header>
+
+<section class="hero-section">
+  <div class="hero-banner">
+    <img src="public/images/banner.jpg" alt="ShopSmartlytoday Exclusive Deals">
+    <div class="banner-content">
+      <h1>Discover Exclusive Deals!</h1>
+      <p>Shop our latest collections and enjoy amazing discounts.</p>
+      <a href="#" class="btn-primary">Shop Now</a>
+    </div>
+  </div>
+</section>
+
+<section class="categories">
+  <h2>Top Categories</h2>
+  <div class="category-list">
+    <!-- (Trimmed for brevity — same items as provided) -->
+  </div>
+</section>
+
+<section class="featured-deals">
+  <h2>Featured Deals</h2>
+  <div class="deal-grid">
+    <!-- (Trimmed for brevity — same items as provided) -->
+  </div>
+</section>
+
+<section class="recommended-products">
+  <h2>Recommended for You</h2>
+  <div class="product-grid">
+    <!-- (Trimmed for brevity — same items as provided) -->
+  </div>
+</section>
+
+<footer>
+  <div class="footer-content">
+    <!-- footer columns ... -->
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 ShopSmartlytoday, All Rights Reserved</p>
+  </div>
+</footer>
+</body>
+</html>

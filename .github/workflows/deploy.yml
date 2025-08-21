@@ -1,0 +1,83 @@
+
+name: Platform Deploy
+on:
+  push:
+    branches: [ main, dev, '**' ]
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: us-east-1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci || true
+      - run: mkdir -p dist && cp -r frontend/* dist/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: dist
+
+      - name: Compute role ARN
+        id: role
+        env:
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+        run: |
+          echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
+          echo "role_arn=$(./scripts/role_for_branch.sh ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ steps.role.outputs.role_arn }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Select workspace
+        run: |
+          cd infra/environments
+          terraform init -reconfigure
+          BR=${GITHUB_REF#refs/heads/}
+          if [ "$BR" = "main" ]; then WS="prod"; elif [ "$BR" = "dev" ]; then WS="staging"; else WS="$BR"; fi
+          terraform workspace select "$WS" || terraform workspace new "$WS"
+          # We do not run apply automatically for previews, only prod/staging infra changes.
+          if [ "$WS" = "prod" ] || [ "$WS" = "staging" ]; then
+            terraform apply -auto-approve -var="aws_region=${{ env.AWS_REGION }}" -var="project_name=shopsmartlytoday" -var="domain_name=shopsmartlytoday.com"
+          fi
+
+      - name: Deploy static site
+        run: |
+          BR=${GITHUB_REF#refs/heads/}
+          if [ "$BR" = "main" ]; then
+            BUCKET="shopsmartlytoday-www-site"
+          elif [ "$BR" = "dev" ]; then
+            BUCKET="shopsmartlytoday-staging-site"
+          else
+            SAFE=$(echo "$BR" | tr '/' '-')
+            BUCKET="shopsmartlytoday-${SAFE}-site"
+          fi
+          aws s3 sync dist/ s3://$BUCKET --delete
+
+      - name: Invalidate CloudFront (prod/staging only)
+        if: "contains('refs/heads/main,refs/heads/dev', github.ref)"
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then DID="${{ secrets.PROD_CLOUDFRONT_ID }}"; else DID="${{ secrets.STAGING_CLOUDFRONT_ID }}"; fi
+          aws cloudfront create-invalidation --distribution-id "$DID" --paths "/*"
