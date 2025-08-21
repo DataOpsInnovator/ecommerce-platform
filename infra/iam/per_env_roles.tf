@@ -140,7 +140,7 @@ data "aws_iam_policy_document" "trust_prod" {
     condition {
       test = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
-      values = ["repo:YOUR-ORG/shopsmartlytoday-platform:ref:refs/heads/main"]
+      values = ["repo:DataOpsInnovator/shopsmartlytoday-platform:ref:refs/heads/main"]
     }
     condition {
       test = "StringEquals"
@@ -158,7 +158,7 @@ data "aws_iam_policy_document" "trust_staging" {
     condition {
       test = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
-      values = ["repo:YOUR-ORG/shopsmartlytoday-platform:ref:refs/heads/dev"]
+      values = ["repo:DataOpsInnovator/shopsmartlytoday-platform:ref:refs/heads/dev"]
     }
     condition {
       test = "StringEquals"
@@ -176,7 +176,7 @@ data "aws_iam_policy_document" "trust_preview" {
     condition {
       test = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
-      values = ["repo:YOUR-ORG/shopsmartlytoday-platform:ref:refs/heads/*"]
+      values = ["repo:DataOpsInnovator/shopsmartlytoday-platform:ref:refs/heads/*"]
     }
     condition {
       test = "StringEquals"
