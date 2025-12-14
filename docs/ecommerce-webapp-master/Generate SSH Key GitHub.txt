@@ -1,0 +1,108 @@
+How to Generate SSH key and use it with my GitHub repository using VS CODE? My email is mefinealew@gmail.com. My repository name is Amazon-Web-Service-AWS. Show me the detailed steps.
+
+To generate an SSH key and use it with your GitHub repository (Amazon-Web-Service-AWS) in Visual Studio Code (VS Code), follow these steps:
+
+1. Generate SSH Key
+Open VS Code and use the terminal.
+
+You can open the terminal from the top menu: Terminal > New Terminal.
+In the terminal, enter the following command to generate a new SSH key. Replace the email with your GitHub email (mefinealew@gmail.com):
+
+ssh-keygen -t ed25519 -C "mefinealew@gmail.com"
+
+If your system doesn’t support ed25519, use rsa with:
+
+ssh-keygen -t rsa -b 4096 -C "mefinealew@gmail.com"
+When prompted to "Enter a file in which to save the key," press Enter to accept the default file location (~/.ssh/id_ed25519 or ~/.ssh/id_rsa).
+
+Next, you'll be asked to create a passphrase. You can press Enter to skip creating one or enter a secure passphrase for added protection.
+
+2. Add SSH Key to SSH Agent
+
+Now that you've generated the SSH key, you'll need to add it to the SSH agent.
+
+Start the SSH agent by running:
+
+Start-Service ssh-agent (for perwershell) or
+
+eval "$(ssh-agent -s)"  (for Git bash)
+
+Add your SSH private key to the SSH agent:
+
+ssh-add ~/.ssh/id_ed25519
+
+If you used RSA, replace id_ed25519 with id_rsa:
+
+ssh-add ~/.ssh/id_rsa
+
+3. Copy the SSH Public Key
+
+You’ll need to add the SSH public key to your GitHub account.
+
+Copy the SSH public key to your clipboard by running:
+
+cat ~/.ssh/id_ed25519.pub
+
+Or, if using RSA:
+
+cat ~/.ssh/id_rsa.pub
+
+Highlight the entire output, starting with ssh-ed25519 (or ssh-rsa), and copy it.
+
+4. Add SSH Key to GitHub
+
+Go to GitHub and log in to your account.
+
+In the top right corner of GitHub, click on your profile photo and then click Settings.
+
+In the left sidebar, click SSH and GPG keys.
+
+Click the New SSH key button.
+
+In the "Title" field, give your SSH key a descriptive name, such as 'VS Code SSH Key'.
+
+In the "Key" field, paste the SSH public key that you copied earlier.
+
+Click Add SSH key.
+
+5. Configure Git to Use SSH
+Next, configure Git to use SSH for your repository.
+
+In VS Code, navigate to your repository folder (Amazon-Web-Service-AWS) or clone it using SSH:
+
+
+git clone git@github.com:DataOpsInnovator/Amazon-Web-Service-AWS-.git
+
+
+Set the remote URL for your repository to use SSH:
+
+
+git remote add origin git@github.com:DataOpsInnovator/Amazon-Web-Service-AWS-.git
+
+
+6. Test Your SSH Connection
+
+To verify that everything is working, run this command to test your SSH connection:
+
+
+ssh -T git@github.com
+
+You should see a message like:
+
+Hi DataOpsInnovator! You've successfully authenticated, but GitHub does not provide shell access.
+
+7. Push Code to GitHub using SSH
+
+Now you can push code changes using SSH in VS Code.
+
+Make changes to your files.
+
+Stage and commit the changes:
+
+git add .
+git commit -m "Your commit message"
+Push the changes to GitHub:
+
+git push origin main
+
+That’s it! You’ve successfully set up SSH with your GitHub repository using VS Code. Let me know if you need further assistance.

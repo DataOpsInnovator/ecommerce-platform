@@ -1,0 +1,38 @@
+
+<!-- 3.2. Create index.html
+index.html will extend layout.html and display the list of tasks. --> -->
+
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2>Your Tasks</h2>
+
+    <!-- Form to add new task -->
+    <form action="{{ url_for('add_task') }}" method="POST">
+        <input type="text" name="task_name" placeholder="Enter new task" required>
+        <button type="submit">Add Task</button>
+    </form>
+
+    <ul>
+        {% for task in tasks %}
+            <li class="{{ 'completed' if task.done else '' }}">
+                {{ task.name }}
+                {% if not task.done %}
+                    <a href="{{ url_for('complete_task', task_id=loop.index0) }}">Complete</a>
+                {% endif %}
+                <a href="{{ url_for('delete_task', task_id=loop.index0) }}">Delete</a>
+            </li>
+        {% else %}
+            <li>No tasks available.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
+<!-- Explanation:
+
+Task List: We loop over the tasks and display them. If the task is marked as completed (task.done == True), we add a completed class for styling.
+Links:
+Complete: Links to mark the task as done.
+Delete: Links to delete the task. -->
+

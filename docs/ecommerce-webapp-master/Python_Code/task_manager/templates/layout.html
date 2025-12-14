@@ -1,0 +1,33 @@
+
+<!-- Step 3: Create the HTML Templates -->
+ # Now, let’s build the HTML files inside the templates/ directory. These files will define the structure of the web pages.
+
+# 3.1. Create layout.html
+# layout.html will be the base template that other templates will extend from. This allows for a consistent header, footer, and structure across your pages. -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Task Manager</h1>
+    </header>
+    
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>Task Manager &copy; 2024</p>
+    </footer>
+</body>
+</html>
+
+
+# {% block content %}: This is where child templates can insert content.
