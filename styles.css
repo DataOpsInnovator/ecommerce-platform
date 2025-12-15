@@ -1,0 +1,356 @@
+/* --- BASE AND LAYOUT STYLES --- */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Main Content Wrapper */
+main {
+    padding: 20px;
+    max-width: 1200px; /* Standardize max width for content */
+    margin: 0 auto;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+/* --- HEADER STYLES --- */
+header {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* User Options */
+.user-options {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Reduced gap for a tighter look */
+    font-size: 0.9em;
+}
+
+.user-options a {
+    text-decoration: none;
+    color: #333;
+}
+
+.user-options a:hover {
+    color: #f90; /* Hover color */
+}
+
+/* Match height for dropdown/input in user options */
+.user-options select {
+    height: 40px; /* Match the height of the other form elements */
+    font-size: 16px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* --- SEARCH BAR STYLES --- */
+.search-bar {
+    /* The search bar is now just a container for the form */
+    flex-grow: 1; /* Allow the search bar to take up most of the space */
+    max-width: 600px; 
+    margin: 0 20px;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 0; 
+    border: 2px solid #f90; /* ShopSmartly orange border */
+    border-radius: 5px;
+    overflow: hidden; 
+}
+
+.search-form select {
+    /* Style for category dropdown */
+    height: 40px; 
+    padding: 5px;
+    font-size: 16px;
+    border: none;
+    border-right: 1px solid #ccc;
+    background-color: #f7f7f7;
+}
+
+.search-form input[type="text"] {
+    /* Style for text input */
+    height: 40px; 
+    padding: 5px 10px;
+    font-size: 16px;
+    flex-grow: 1; 
+    border: none;
+}
+
+.search-form button {
+    /* Style for search button */
+    background-color: #f90;
+    color: white;
+    border: none;
+    padding: 0 15px;
+    height: 40px; 
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.search-form button:hover {
+    background-color: #e88c00;
+}
+
+
+/* --- HORIZONTAL CATEGORY LINKS STYLES --- */
+.category-links {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5px;
+    background-color: #0046be; /* Darker blue background */
+    padding: 10px 0;
+}
+
+.category-links a {
+    text-decoration: none;
+    color: white; 
+    font-size: 1em;
+    padding: 8px 15px;
+    transition: background-color 0.2s;
+}
+
+.category-links a:hover {
+    background-color: #f90; /* Orange hover effect */
+    color: white;
+    border-radius: 5px;
+}
+
+/* --- HERO SECTION STYLES --- */
+.hero-section {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.hero-banner img {
+    width: 100%;
+    height: 350px; 
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.banner-content {
+    position: absolute;
+    top: 50%;
+    left: 10%; /* Move content slightly inward */
+    transform: translateY(-50%);
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.banner-content h1 {
+    font-size: 2.5em;
+    margin-bottom: 5px;
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: #f90;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #e88c00;
+}
+
+.btn-secondary {
+    display: inline-block;
+    background-color: #0046be;
+    color: white;
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+    background-color: #003699;
+}
+
+
+/* --- CATEGORY, DEALS, & PRODUCT GRID STYLES (Using CSS Grid for responsiveness) --- */
+.categories h2, .featured-deals h2, .recommended-products h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #0046be;
+}
+
+.category-list, .deal-grid {
+    display: grid;
+    /* Responsive Grid: 150px minimum width, up to 1fr (equal share) */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+    gap: 20px;
+}
+
+.category-item, .deal-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    transition: box-shadow 0.3s;
+}
+
+.category-item:hover, .deal-item:hover, .product-item:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.category-item img, .deal-item img, .product-item img {
+    width: 100%;
+    /* Set a consistent height for image uniformity */
+    height: 150px; 
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.category-item h3 a, .deal-item h3 a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.1em;
+}
+
+.deal-item p {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+
+/* Recommended Products Specific Styles (Your original flex-based approach) */
+.recommended-products .product-grid {
+    display: flex;
+    /* Use flex for a tighter horizontal row if you prefer 4 items */
+    justify-content: space-between;
+    gap: 20px; 
+}
+
+.recommended-products .product-item {
+    /* 23% allows for four items plus gaps (4 * 23 = 92, leaving 8% for 3 gaps) */
+    width: 23%; 
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+
+/* --- FOOTER STYLES --- */
+footer {
+    background-color: #333;
+    padding: 30px 20px;
+    color: white;
+    margin-top: 40px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto 20px auto;
+}
+
+.footer-column {
+    /* Giving each column an equal width */
+    width: 20%; 
+}
+
+.footer-column h3 {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    color: #f90; /* Highlight section titles */
+}
+
+.footer-column ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+    text-decoration: none;
+    color: #ccc; 
+    font-size: 0.9em;
+    transition: color 0.2s;
+}
+
+.footer-column ul li a:hover {
+    color: #007bff;
+}
+
+.footer-bottom {
+    text-align: center;
+    color: #ccc;
+    padding-top: 15px;
+    border-top: 1px solid #444;
+}
+
+/* --- MEDIA QUERIES (For basic mobile responsiveness) --- */
+@media (max-width: 768px) {
+    .header-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-bar {
+        margin: 10px 0;
+        width: 100%;
+        max-width: none;
+    }
+    
+    .category-links {
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 10px;
+    }
+    
+    .category-links a {
+        flex-shrink: 0; /* Prevents links from shrinking */
+    }
+
+    .footer-content {
+        flex-wrap: wrap;
+    }
+
+    .footer-column {
+        width: 45%; /* Two columns on mobile */
+        margin-bottom: 20px;
+    }
+
+    .recommended-products .product-grid {
+        flex-wrap: wrap;
+    }
+
+    .recommended-products .product-item {
+        width: 45%; /* Two products per row on mobile */
+    }
+}
+
